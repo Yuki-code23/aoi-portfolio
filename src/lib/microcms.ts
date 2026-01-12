@@ -15,9 +15,14 @@ export const client = createClient({
 });
 
 export const getWorks = async () => {
-    return await client.getList<Work>({
-        endpoint: "works",
-    });
+    try {
+        return await client.getList<Work>({
+            endpoint: "works",
+        });
+    } catch (error) {
+        console.error("Error fetching works from microCMS:", error);
+        return { contents: [], totalCount: 0, offset: 0, limit: 10 };
+    }
 };
 
 export const getWorkDetail = async (id: string) => {
@@ -28,7 +33,12 @@ export const getWorkDetail = async (id: string) => {
 };
 
 export const getNews = async () => {
-    return await client.getList<News>({
-        endpoint: "news",
-    });
+    try {
+        return await client.getList<News>({
+            endpoint: "news",
+        });
+    } catch (error) {
+        console.error("Error fetching news from microCMS:", error);
+        return { contents: [], totalCount: 0, offset: 0, limit: 10 };
+    }
 };
