@@ -1,28 +1,15 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Maximize2 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { getWorkDetail } from "@/lib/microcms";
 
-const mockWorks = [
-    {
-        id: "1",
-        title: "Neon Genesis",
-        category: ["Character", "Concept Art"],
-        image: { url: "https://images.unsplash.com/photo-1635332829471-aa393169fc0a?q=80&w=1000&auto=format&fit=crop" },
-        tools: "Stable Diffusion, Photoshop",
-        theme: "Futuristic / Cyberpunk",
-        description: "デジタルと有機体の融合をテーマにした連作の一枚。",
-        retouched: true,
-    },
-    // 他のモックデータも同様に取得可能
-];
+interface Props {
+    params: Promise<{ id: string }>;
+}
 
-const WorkDetailPage = () => {
-    const { id } = useParams();
-    const work = mockWorks.find((w) => w.id === id) || mockWorks[0];
+const WorkDetailPage = async ({ params }: Props) => {
+    const { id } = await params;
+    const work = await getWorkDetail(id);
 
     return (
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-white">
@@ -32,12 +19,7 @@ const WorkDetailPage = () => {
             </Link>
 
             <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                    className="lg:col-span-8 relative aspect-[3/4] md:aspect-auto md:h-[80vh] bg-gray-50 overflow-hidden"
-                >
+                <div className="lg:col-span-8 relative aspect-[3/4] md:aspect-auto md:h-[80vh] bg-gray-50 overflow-hidden">
                     <Image
                         src={work.image.url}
                         alt={work.title}
@@ -49,14 +31,9 @@ const WorkDetailPage = () => {
                             <Maximize2 size={18} strokeWidth={1} />
                         </button>
                     </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="lg:col-span-4 space-y-16"
-                >
+                <div className="lg:col-span-4 space-y-16">
                     <header className="space-y-4">
                         <p className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase">
                             {work.category.join(" / ")}
@@ -70,7 +47,9 @@ const WorkDetailPage = () => {
                         <div className="space-y-8 font-serif-jp text-sm tracking-widest text-charcoal/70 font-extralight leading-relaxed">
                             <div>
                                 <h3 className="font-serif-en text-[9px] text-charcoal/30 tracking-[0.3em] mb-3 uppercase">Description</h3>
-                                <p>{work.description}</p>
+                                <div className="prose prose-sm prose-gray font-serif-jp">
+                                    {work.description}
+                                </div>
                             </div>
                         </div>
 
@@ -98,7 +77,7 @@ const WorkDetailPage = () => {
                             Contact about this work
                         </Link>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

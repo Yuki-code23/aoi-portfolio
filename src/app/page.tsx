@@ -1,35 +1,10 @@
 import Hero from "@/components/ui/Hero";
 import WorkCard from "@/components/ui/WorkCard";
-import { Work } from "@/types/microcms";
+import { getWorks } from "@/lib/microcms";
 
-const mockWorks = [
-  {
-    id: "1",
-    title: "Neon Genesis",
-    category: ["Character", "Concept Art"],
-    image: { url: "https://images.unsplash.com/photo-1635332829471-aa393169fc0a?q=80&w=1000&auto=format&fit=crop" },
-  },
-  {
-    id: "2",
-    title: "Crystal Forest",
-    category: ["Background"],
-    image: { url: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" },
-  },
-  {
-    id: "3",
-    title: "Void Wanderer",
-    category: ["Character"],
-    image: { url: "https://images.unsplash.com/photo-1634128221889-82ed6efdfac3?q=80&w=1000&auto=format&fit=crop" },
-  },
-  {
-    id: "4",
-    title: "Cyber Citadel",
-    category: ["Background", "Concept Art"],
-    image: { url: "https://images.unsplash.com/photo-1614728263952-84ea256f96ec?q=80&w=1000&auto=format&fit=crop" },
-  },
-];
+export default async function Home() {
+  const { contents: works } = await getWorks();
 
-export default function Home() {
   return (
     <div className="bg-white">
       <Hero />
@@ -54,12 +29,12 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-12 gap-y-32 lg:gap-x-24">
-          {mockWorks.map((work, index) => (
+          {works.map((work, index) => (
             <div
               key={work.id}
               className={`${index % 2 !== 0 ? "lg:mt-32" : ""} max-w-lg mx-auto w-full`}
             >
-              <WorkCard work={work as Partial<Work>} />
+              <WorkCard work={work} />
             </div>
           ))}
         </div>
