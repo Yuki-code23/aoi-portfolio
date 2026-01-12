@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", var(--font-geist-sans);
-  --font-display: "Orbitron", sans-serif;
+  --font-serif-jp: "Noto Serif JP", serif;
+  --font-serif-en: "Playfair Display", serif;
 
-  --color-neon-blue: #00f2ff;
-  --color-neon-purple: #bc13fe;
-  --color-cyber-black: #050505;
-  --color-cyber-gray: #1a1a1a;
+  --color-charcoal: #333333;
+  --color-white: #ffffff;
+  --color-offwhite: #fafafa;
 }
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #333333;
 }
 
 html {
@@ -22,24 +21,22 @@ html {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-serif-jp);
+  font-weight: 300;
   min-height: 100vh;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.font-serif-en {
+  font-family: var(--font-serif-en);
+  letter-spacing: 0.15em;
 }
 
-.neon-border {
-  border: 1px solid var(--color-neon-blue);
-  box-shadow: 0 0 10px var(--color-neon-blue);
+.letter-spacing-wide {
+  letter-spacing: 0.2em;
 }
 
-.text-gradient {
-  background: linear-gradient(to right, var(--color-neon-blue), var(--color-neon-purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.thin-line {
+  height: 1px;
+  background-color: #333333;
+  opacity: 0.2;
 }

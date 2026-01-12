@@ -5,63 +5,63 @@ import Image from "next/image";
 
 const AboutPage = () => {
     return (
-        <div className="max-w-4xl mx-auto px-4 py-20">
+        <div className="max-w-6xl mx-auto px-6 py-32">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5 }}
             >
-                <h1 className="text-4xl font-display font-bold mb-12 text-gradient">ABOUT</h1>
-
-                <div className="grid md:grid-cols-2 gap-12 items-start mb-20">
-                    <div className="relative aspect-square rounded-2xl overflow-hidden glass neon-border">
+                <div className="flex flex-col md:flex-row gap-20 mb-32 items-center md:items-start">
+                    <div className="w-full md:w-5/12 aspect-[3/4] relative overflow-hidden bg-gray-50 md:mt-24">
                         <Image
                             src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop"
                             alt="Profile"
                             fill
-                            className="object-cover"
+                            className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                         />
                     </div>
-                    <div>
-                        <h2 className="text-2xl font-display font-bold mb-4">月咲 葵 (Tsukisaki Aoi)</h2>
-                        <p className="text-gray-400 mb-6 leading-relaxed">
-                            AIアーティスト / コンセプトワーカー。
-                            最新の画像生成AIを駆使し、現実とデジタルの境界線を曖昧にするような、
-                            緻密で透明感のある世界観を追求しています。
-                        </p>
-                        <p className="text-gray-400 mb-6 leading-relaxed">
-                            単なる生成に留まらず、丁寧なレタッチとコンポジットを通じて、
-                            一枚一枚の作品にストーリーを宿らせることを信条としています。
-                        </p>
+                    <div className="w-full md:w-7/12 space-y-12">
+                        <h1 className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase">Profile</h1>
+                        <div className="space-y-4">
+                            <h2 className="font-serif-jp text-4xl text-charcoal font-extralight tracking-widest">月咲 葵</h2>
+                            <p className="font-serif-en text-sm tracking-[0.2em] text-charcoal/30 uppercase">Tsukisaki Aoi</p>
+                        </div>
+                        <div className="space-y-8 font-serif-jp text-charcoal/70 leading-relaxed tracking-wider font-extralight">
+                            <p>
+                                AIアーティスト / コンセプトワーカー。<br />
+                                最新の画像生成AIを駆使し、現実とデジタルの境界線を曖昧にするような、
+                                緻密で透明感のある世界観を追求しています。
+                            </p>
+                            <p>
+                                単なる生成に留まらず、丁寧なレタッチとコンポジットを通じて、
+                                一枚一枚の作品にストーリーを宿らせることを信条としています。
+                            </p>
+                        </div>
+
+                        <div className="pt-12">
+                            <h3 className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase mb-8">Philosophy</h3>
+                            <p className="font-serif-jp text-lg text-charcoal/80 font-extralight italic leading-loose border-l-2 border-gray-100 pl-8">
+                                「AIは筆であり、プロンプトは呼吸である。<br />
+                                まだ誰も見たことのない、心の深淵に眠る光景を<br />
+                                アルゴリズムと共に手繰り寄せることが、私の制作のすべてです。」
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <section className="mb-20">
-                    <h2 className="text-2xl font-display font-bold mb-6">PHILOSOPHY</h2>
-                    <div className="glass p-8 rounded-2xl border border-white/10">
-                        <p className="text-gray-300 leading-relaxed italic">
-                            「AIは筆であり、プロンプトは呼吸である。
-                            まだ誰も見たことのない、心の深淵に眠る光景を
-                            アルゴリズムと共に手繰り寄せることが、私の制作のすべてです。」
-                        </p>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 className="text-2xl font-display font-bold mb-6">STORY / ACHIEVEMENTS</h2>
-                    <ul className="space-y-4 text-gray-400">
-                        <li className="flex gap-4">
-                            <span className="text-neon-blue font-display">2024</span>
-                            <span>AI Art Excellence Award 受賞</span>
-                        </li>
-                        <li className="flex gap-4">
-                            <span className="text-neon-blue font-display">2023</span>
-                            <span>個展「鏡の中のデジタル」開催</span>
-                        </li>
-                        <li className="flex gap-4">
-                            <span className="text-neon-blue font-display">2022</span>
-                            <span>AIアーティストとしての活動を開始</span>
-                        </li>
+                <section className="max-w-3xl ml-auto border-t border-gray-50 pt-24">
+                    <h2 className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase mb-12 text-right">Story / Achievements</h2>
+                    <ul className="space-y-8 text-charcoal/60">
+                        {[
+                            { year: "2024", event: "AI Art Excellence Award 受賞" },
+                            { year: "2023", event: "個展「鏡の中のデジタル」開催（東京・表参道）" },
+                            { year: "2022", event: "AIアーティストとしての本格的な活動を開始" },
+                        ].map((item) => (
+                            <li key={item.year} className="flex justify-between items-baseline group">
+                                <span className="font-serif-en text-sm tracking-[0.2em] opacity-40 group-hover:opacity-100 transition-opacity">{item.year}</span>
+                                <span className="font-serif-jp text-sm tracking-wider font-extralight">{item.event}</span>
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </motion.div>

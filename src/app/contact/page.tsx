@@ -4,59 +4,66 @@ import { motion } from "framer-motion";
 
 const ContactPage = () => {
     return (
-        <div className="max-w-4xl mx-auto px-4 py-20">
+        <div className="max-w-6xl mx-auto px-6 py-32">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5 }}
             >
-                <h1 className="text-4xl font-display font-bold mb-12 text-gradient">CONTACT</h1>
+                <div className="flex flex-col md:flex-row gap-24">
+                    <div className="w-full md:w-5/12 space-y-24">
+                        <header className="space-y-4">
+                            <h1 className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase">Contact</h1>
+                            <p className="font-serif-jp text-4xl text-charcoal font-extralight tracking-widest">お問い合わせ</p>
+                        </header>
 
-                <div className="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-display font-bold mb-6">GUIDELINE</h2>
-                            <div className="space-y-4 text-sm text-gray-400">
-                                <p>・商用利用、個人依頼ともに受け付けております。</p>
-                                <p>・生成物の加工は、依頼内容に準ずる範囲でのみ許可されます。</p>
-                                <p>・著作権の譲渡については別途ご相談ください。</p>
-                                <p>・クレジット表記は必須ではありませんが、歓迎いたします。</p>
+                        <section className="space-y-12">
+                            <div className="space-y-4">
+                                <h2 className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase">Guideline</h2>
+                                <div className="space-y-4 font-serif-jp text-xs text-charcoal/50 leading-loose tracking-widest">
+                                    <p>・商用利用、個人依頼ともに受け付けております。</p>
+                                    <p>・生成物の加工は、依頼内容に準ずる範囲でのみ許可されます。</p>
+                                    <p>・著作権の譲渡については別途ご相談ください。</p>
+                                    <p>・クレジット表記は必須ではありませんが、歓迎いたします。</p>
+                                </div>
                             </div>
-                        </section>
 
-                        <section>
-                            <h2 className="text-2xl font-display font-bold mb-6">OTHER WAYS</h2>
-                            <div className="space-y-4 text-gray-300">
-                                <p>Email: contact@aoi-tsukisaki.com</p>
-                                <p>SKIMA / pixivリクエスト対応</p>
+                            <div className="space-y-4">
+                                <h2 className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase">Other Ways</h2>
+                                <div className="space-y-2 font-serif-jp text-sm text-charcoal/70 tracking-widest">
+                                    <p className="font-serif-en">Email: contact@aoi-tsukisaki.com</p>
+                                    <p>SKIMA / Pixiv リクエスト対応</p>
+                                </div>
                             </div>
                         </section>
                     </div>
 
-                    <div className="glass p-8 rounded-2xl border border-white/10">
-                        <form className="space-y-6 text-white">
-                            <div>
-                                <label className="block text-xs font-display text-gray-500 mb-2 uppercase tracking-widest">Name</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 focus:border-neon-blue outline-none transition-colors" />
+                    <div className="w-full md:w-7/12 md:mt-48">
+                        <form className="space-y-12">
+                            <div className="grid md:grid-cols-2 gap-12">
+                                <div className="border-b border-gray-100 pb-2">
+                                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Name</label>
+                                    <input type="text" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="お名前" />
+                                </div>
+                                <div className="border-b border-gray-100 pb-2">
+                                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Email</label>
+                                    <input type="email" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="メールアドレス" />
+                                </div>
                             </div>
-                            <div>
-                                <label className="block text-xs font-display text-gray-500 mb-2 uppercase tracking-widest">Email</label>
-                                <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 focus:border-neon-blue outline-none transition-colors" />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-display text-gray-500 mb-2 uppercase tracking-widest">Subject</label>
-                                <select className="w-full bg-white/5 border border-white/10 rounded-lg p-3 focus:border-neon-blue outline-none transition-colors">
-                                    <option className="bg-cyber-black">個人依頼 / Commission</option>
-                                    <option className="bg-cyber-black">商用利用 / Commercial</option>
-                                    <option className="bg-cyber-black">その他 / Others</option>
+                            <div className="border-b border-gray-100 pb-2">
+                                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Subject</label>
+                                <select className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 appearance-none">
+                                    <option>個人依頼 / Commission</option>
+                                    <option>商用利用 / Commercial</option>
+                                    <option>その他 / Others</option>
                                 </select>
                             </div>
-                            <div>
-                                <label className="block text-xs font-display text-gray-500 mb-2 uppercase tracking-widest">Message</label>
-                                <textarea rows={5} className="w-full bg-white/5 border border-white/10 rounded-lg p-3 focus:border-neon-blue outline-none transition-colors"></textarea>
+                            <div className="border-b border-gray-100 pb-2">
+                                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Message</label>
+                                <textarea rows={4} className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 resize-none" placeholder="メッセージ内容"></textarea>
                             </div>
-                            <button className="w-full py-4 bg-neon-blue text-cyber-black font-display font-bold rounded-lg hover:shadow-[0_0_20px_#00f2ff] transition-all uppercase tracking-widest">
-                                SEND MESSAGE
+                            <button className="px-12 py-4 bg-charcoal text-white font-serif-en text-[10px] tracking-[0.4em] hover:bg-black transition-all uppercase">
+                                Send Message
                             </button>
                         </form>
                     </div>

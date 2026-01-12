@@ -4,40 +4,44 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
     return (
-        <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-            {/* Background Effect */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyber-black" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-blue/20 rounded-full blur-[100px] animate-pulse" />
+        <section className="relative h-[95vh] flex items-center bg-white overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 lg:px-24 w-full">
+                <div className="md:ml-[10%] max-w-4xl">
+                    <motion.p
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase mb-8"
+                    >
+                        AI Artist & Designer
+                    </motion.p>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                        className="text-6xl md:text-9xl font-serif-en text-charcoal leading-[1.1] mb-12"
+                    >
+                        Tsukisaki <br />
+                        <span className="font-bold underline decoration-[1px] underline-offset-[12px] decoration-gray-200">Aoi</span>
+                    </motion.h1>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                        className="md:pl-32"
+                    >
+                        <p className="max-w-md text-charcoal/70 text-sm md:text-base leading-relaxed tracking-wider font-serif-jp font-extralight">
+                            AIと人間の感性が交差する領域で、<br />
+                            静寂と透明感を纏った新しい美のカタチを追求しています。<br />
+                            緻密な計算と、偶然が生む揺らぎ。
+                        </p>
+                        <div className="mt-12 w-12 h-[1px] bg-charcoal/30" />
+                    </motion.div>
+                </div>
             </div>
 
-            <div className="relative z-10 text-center px-4">
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="font-display tracking-[0.3em] text-neon-blue mb-4"
-                >
-                    AI ARTIST
-                </motion.p>
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-5xl md:text-8xl font-display font-bold mb-6"
-                >
-                    TSUKISAKI <span className="text-gradient">AOI</span>
-                </motion.h1>
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed"
-                >
-                    AIと創造性の融合。緻密なディテールと透明感が織りなす、
-                    まだ見ぬ世界の断片をここへ。
-                </motion.p>
-            </div>
+            {/* Subtle background element */}
+            <div className="absolute top-1/4 -right-20 w-[400px] h-[400px] bg-gray-50 rounded-full blur-[80px] -z-10" />
         </section>
     );
 };

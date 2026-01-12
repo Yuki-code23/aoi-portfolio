@@ -25,69 +25,78 @@ const WorkDetailPage = () => {
     const work = mockWorks.find((w) => w.id === id) || mockWorks[0];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
-            <Link href="/#works" className="inline-flex items-center text-gray-400 hover:text-neon-blue mb-8 transition-colors">
-                <ArrowLeft size={20} className="mr-2" />
+        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 bg-white">
+            <Link href="/#works" className="inline-flex items-center font-serif-en text-[10px] tracking-[0.3em] text-charcoal/40 hover:text-charcoal mb-16 transition-colors group">
+                <ArrowLeft size={14} className="mr-2 transition-transform group-hover:-translate-x-1" />
                 BACK TO GALLERY
             </Link>
 
-            <div className="grid lg:grid-cols-3 gap-12">
+            <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="lg:col-span-2 relative aspect-[3/4] rounded-2xl overflow-hidden glass neon-border group"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="lg:col-span-8 relative aspect-[3/4] md:aspect-auto md:h-[80vh] bg-gray-50 overflow-hidden"
                 >
                     <Image
                         src={work.image.url}
                         alt={work.title}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                     />
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="p-3 bg-black/50 text-white rounded-full backdrop-blur-md">
-                            <Maximize2 size={24} />
+                    <div className="absolute top-6 right-6 lg:opacity-0 hover:opacity-100 transition-opacity">
+                        <button className="p-4 bg-white/80 text-charcoal backdrop-blur-sm rounded-full">
+                            <Maximize2 size={18} strokeWidth={1} />
                         </button>
                     </div>
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className="lg:col-span-4 space-y-16"
                 >
-                    <div>
-                        <h1 className="text-4xl font-display font-bold text-gradient mb-2">{work.title}</h1>
-                        <p className="text-neon-blue">{work.category.join(" / ")}</p>
-                    </div>
+                    <header className="space-y-4">
+                        <p className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase">
+                            {work.category.join(" / ")}
+                        </p>
+                        <h1 className="font-serif-en text-4xl md:text-5xl text-charcoal font-medium tracking-widest leading-tight">
+                            {work.title}
+                        </h1>
+                    </header>
 
-                    <div className="space-y-4">
-                        <div className="glass p-6 rounded-xl border border-white/10 space-y-4">
+                    <div className="space-y-12">
+                        <div className="space-y-8 font-serif-jp text-sm tracking-widest text-charcoal/70 font-extralight leading-relaxed">
                             <div>
-                                <h3 className="text-xs font-display text-gray-500 tracking-widest mb-1 uppercase">Theme</h3>
-                                <p className="text-gray-200">{work.theme}</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xs font-display text-gray-500 tracking-widest mb-1 uppercase">Generation Tools</h3>
-                                <p className="text-gray-200">{work.tools}</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xs font-display text-gray-500 tracking-widest mb-1 uppercase">Retouched</h3>
-                                <p className="text-gray-200">{work.retouched ? "YES" : "NO"}</p>
+                                <h3 className="font-serif-en text-[9px] text-charcoal/30 tracking-[0.3em] mb-3 uppercase">Description</h3>
+                                <p>{work.description}</p>
                             </div>
                         </div>
 
-                        <div>
-                            <h3 className="text-xs font-display text-gray-500 tracking-widest mb-2 uppercase">Description</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                {work.description}
-                            </p>
+                        <div className="space-y-6 pt-12 border-t border-gray-50">
+                            <div className="flex justify-between items-baseline">
+                                <h3 className="font-serif-en text-[9px] text-charcoal/30 tracking-[0.3em] uppercase">Theme</h3>
+                                <p className="font-serif-jp text-xs text-charcoal/60">{work.theme}</p>
+                            </div>
+                            <div className="flex justify-between items-baseline">
+                                <h3 className="font-serif-en text-[9px] text-charcoal/30 tracking-[0.3em] uppercase">Tools</h3>
+                                <p className="font-serif-en text-[10px] text-charcoal/60 underline decoration-gray-100">{work.tools}</p>
+                            </div>
+                            <div className="flex justify-between items-baseline">
+                                <h3 className="font-serif-en text-[9px] text-charcoal/30 tracking-[0.3em] uppercase">Retouched</h3>
+                                <p className="font-serif-en text-[10px] text-charcoal/60">{work.retouched ? "YES" : "NO"}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="pt-8">
-                        <button className="w-full py-4 glass border border-neon-blue/30 text-neon-blue font-display font-bold hover:bg-neon-blue/10 transition-colors uppercase tracking-widest">
-                            CONTACT ABOUT THIS WORK
-                        </button>
+                    <div className="pt-12">
+                        <Link
+                            href="/contact"
+                            className="block w-full py-5 border border-charcoal/10 text-center font-serif-en text-[10px] tracking-[0.4em] text-charcoal hover:bg-charcoal hover:text-white transition-all uppercase"
+                        >
+                            Contact about this work
+                        </Link>
                     </div>
                 </motion.div>
             </div>

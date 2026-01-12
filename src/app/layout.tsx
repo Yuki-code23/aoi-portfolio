@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Noto_Serif_JP, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
-const inter = Inter({
-  variable: "--font-inter",
+const serifJP = Noto_Serif_JP({
+  variable: "--font-serif-jp",
   subsets: ["latin"],
+  weight: ["200", "300", "400", "700"],
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
+
 
 export const metadata: Metadata = {
   title: "Tsukisaki Aoi | AI Artist Portfolio",
@@ -27,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${inter.variable} ${orbitron.variable} font-sans antialiased bg-cyber-black text-white`}
+        className={`${serifJP.variable} ${playfair.variable} font-serif-jp antialiased bg-white text-charcoal`}
       >
         <Header />
         <main className="min-h-screen pt-20">

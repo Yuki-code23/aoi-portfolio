@@ -2,17 +2,17 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <footer className="glass border-t border-white/10 py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p className="font-display text-lg font-bold text-gradient mb-4">
+        <footer className="bg-white py-24 border-t border-gray-50">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+                <p className="font-serif-en text-xl tracking-[0.4em] text-charcoal mb-8">
                     TSUKISAKI AOI
                 </p>
-                <div className="flex justify-center space-x-6 mb-8">
-                    <Link href="#" className="text-gray-400 hover:text-neon-blue">X (Twitter)</Link>
-                    <Link href="#" className="text-gray-400 hover:text-neon-blue">Instagram</Link>
-                    <Link href="#" className="text-gray-400 hover:text-neon-blue">pixiv</Link>
+                <div className="flex justify-center space-x-12 mb-12">
+                    <Link href="#" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">X / Twitter</Link>
+                    <Link href="#" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">Instagram</Link>
+                    <Link href="#" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">Pixiv</Link>
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="font-serif-jp text-[9px] tracking-[0.15em] text-charcoal/30 uppercase">
                     &copy; {new Date().getFullYear()} Tsukisaki Aoi. All rights reserved.
                 </p>
             </div>
