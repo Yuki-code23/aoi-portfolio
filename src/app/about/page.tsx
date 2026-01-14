@@ -12,19 +12,28 @@ const AboutPage = () => {
                 transition={{ duration: 1.5 }}
             >
                 <div className="flex flex-col md:flex-row gap-20 mb-32 items-center md:items-start">
-                    <div className="group w-full md:w-5/12 aspect-[3/4] relative overflow-hidden bg-gray-50 md:mt-24">
+                    <div className="w-full md:w-5/12 aspect-[3/4] relative overflow-hidden bg-gray-50 md:mt-24 group cursor-crosshair">
                         <Image
                             src="/images/profile.jpg"
                             alt="Profile"
                             fill
-                            className="object-cover transition-all duration-1000"
+                            priority
+                            className="object-cover"
                         />
-                        <Image
-                            src="/images/profile_hover.jpg"
-                            alt="Profile Hover"
-                            fill
-                            className="object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
-                        />
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileHover={{ opacity: 1 }}
+                            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                            className="absolute inset-0 z-10"
+                        >
+                            <Image
+                                src="/images/profile_hover.jpg"
+                                alt="Profile Hover"
+                                fill
+                                priority
+                                className="object-cover"
+                            />
+                        </motion.div>
                     </div>
                     <div className="w-full md:w-7/12 space-y-12">
                         <h1 className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase">Profile</h1>
