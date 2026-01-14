@@ -53,7 +53,7 @@ export async function submitContact(formData: FormData) {
         }
 
         return { success: true };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Submission Error:", error);
         return { error: "送信中にエラーが発生しました。時間をおいて再度お試しください。" };
     }
