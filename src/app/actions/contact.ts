@@ -1,15 +1,21 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const resendApiKey = process.env.RESEND_API_KEY!;
 
-// サーバーサイド専用のSupabaseクライアント（RLSをバイパスして保存するため）
+// Nodemailerの設定 (Gmail用)
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+    },
+});
+
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
-const resend = new Resend(resendApiKey);
 
 export async function submitContact(formData: FormData) {
     const name = formData.get("name") as string;
@@ -29,16 +35,21 @@ export async function submitContact(formData: FormData) {
 
         if (dbError) throw dbError;
 
-        // 2. Resendを使用してメール送信
-        // 本来は送信先メールアドレスを環境変数で管理するのが望ましい
-        const { error: mailError } = await resend.emails.send({
-            from: "Portfolio <onboarding@resend.dev>", // 独自ドメインを持っていない場合の初期設定
-            to: ["delivered@resend.dev"], // テスト用の送信先。実際には月咲様のメールアドレスを設定
+        // 2. メール送信の準備が整っているか確認
+        if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+            console.warn("Gmail credentials are not set. Emails will not be sent.");
+            return { success: true, warning: "送信設定が未完了ですが、内容は保存されました。" };
+        }
+
+        // 3. 管理者（月咲様）への通知メール
+        await transporter.sendMail({
+            from: `"Portfolio System" <${process.env.GMAIL_USER}>`,
+            to: process.env.ADMIN_EMAIL || process.env.GMAIL_USER,
             subject: `【お問い合わせ】${subject}`,
             html: `
                 <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
                     <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">新しいお問い合わせがありました</h2>
-                    <p><strong>名前:</strong> ${name}</p>
+                    <p><strong>名前:</strong> ${name} 様</p>
                     <p><strong>メールアドレス:</strong> ${email}</p>
                     <p><strong>件名:</strong> ${subject}</p>
                     <p><strong>メッセージ:</strong></p>
@@ -47,10 +58,34 @@ export async function submitContact(formData: FormData) {
             `,
         });
 
-        if (mailError) {
-            console.error("Mail Error:", mailError);
-            // メール送信に失敗してもDBには残っているので、ここでは一応成功とみなしてログを出す
-        }
+        // 4. 送信者への自動返信（サンクスメール）
+        await transporter.sendMail({
+            from: `"月咲 葵 Portfolio" <${process.env.GMAIL_USER}>`,
+            to: email,
+            subject: "お問い合わせありがとうございます",
+            html: `
+                <div style="font-family: 'Noto Serif JP', serif; line-height: 1.8; color: #333; max-width: 600px; margin: 0 auto;">
+                    <header style="padding: 20px 0; border-bottom: 1px solid #eee; margin-bottom: 30px;">
+                        <h1 style="font-size: 18px; font-weight: normal; letter-spacing: 0.1em;">Aoi Tsukisaki Portfolio</h1>
+                    </header>
+                    <main>
+                        <p>${name} 様</p>
+                        <p>この度は、月咲 葵のポートフォリオサイトよりお問い合わせいただき、誠にありがとうございます。</p>
+                        <p>内容を確認次第、改めてご連絡させていただきます。返信まで数日お時間をいただく場合がございますが、何卒ご了承ください。</p>
+                        
+                        <div style="background: #fafafa; padding: 20px; border-radius: 4px; margin: 30px 0;">
+                            <h2 style="font-size: 14px; margin-top: 0;">お問い合わせ内容</h2>
+                            <p style="font-size: 13px; margin-bottom: 5px;"><strong>件名：</strong> ${subject}</p>
+                            <p style="font-size: 13px; white-space: pre-wrap;"><strong>本文：</strong><br />${message}</p>
+                        </div>
+                    </main>
+                    <footer style="padding: 20px 0; border-top: 1px solid #eee; margin-top: 50px; font-size: 12px; color: #999;">
+                        <p>© 2026 Aoi Tsukisaki. All Rights Reserved.</p>
+                        <p>URL: <a href="https://aoi-tsukisaki.com" style="color: #999; text-decoration: none;">aoi-tsukisaki.com</a></p>
+                    </footer>
+                </div>
+            `,
+        });
 
         return { success: true };
     } catch (error: unknown) {

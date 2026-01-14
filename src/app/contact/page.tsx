@@ -12,7 +12,7 @@ const ContactForm = () => {
     const workTitle = searchParams.get("work");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+    const [result, setResult] = useState<{ success?: boolean; error?: string; warning?: string } | null>(null);
 
     const defaultSubject = workTitle ? "その他 / Others" : "個人依頼 / Commission";
     const defaultMessage = workTitle ? `作品『${workTitle}』について` : "";
@@ -42,6 +42,11 @@ const ContactForm = () => {
                         お問い合わせありがとうございます。送信が完了しました。<br />
                         内容を確認次第、改めてご連絡させていただきます。
                     </p>
+                    {result.warning && (
+                        <p className="font-serif-jp text-[10px] text-amber-500/60 tracking-widest">
+                            ※{result.warning}
+                        </p>
+                    )}
                 </div>
                 <button
                     onClick={() => setResult(null)}
