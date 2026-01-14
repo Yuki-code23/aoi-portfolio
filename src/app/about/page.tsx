@@ -12,12 +12,18 @@ const AboutPage = () => {
                 transition={{ duration: 1.5 }}
             >
                 <div className="flex flex-col md:flex-row gap-20 mb-32 items-center md:items-start">
-                    <div className="w-full md:w-5/12 aspect-[3/4] relative overflow-hidden bg-gray-50 md:mt-24">
+                    <div className="group w-full md:w-5/12 aspect-[3/4] relative overflow-hidden bg-gray-50 md:mt-24">
                         <Image
-                            src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop"
+                            src="/images/profile.jpg"
                             alt="Profile"
                             fill
-                            className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                            className="object-cover transition-all duration-1000"
+                        />
+                        <Image
+                            src="/images/profile_hover.jpg"
+                            alt="Profile Hover"
+                            fill
+                            className="object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
                         />
                     </div>
                     <div className="w-full md:w-7/12 space-y-12">
