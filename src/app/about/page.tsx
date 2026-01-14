@@ -53,9 +53,8 @@ const AboutPage = () => {
                     <h2 className="font-serif-en text-[10px] tracking-[0.5em] text-charcoal/40 uppercase mb-12 text-right">Story / Achievements</h2>
                     <ul className="space-y-8 text-charcoal/60">
                         {[
-                            { year: "2024", event: "AI Art Excellence Award 受賞" },
-                            { year: "2023", event: "個展「鏡の中のデジタル」開催（東京・表参道）" },
-                            { year: "2022", event: "AIアーティストとしての本格的な活動を開始" },
+                            //ここに出来事を追記していく。
+                            { year: "2025", event: "AIアーティストとしての本格的な活動を開始" },
                         ].map((item) => (
                             <li key={item.year} className="flex justify-between items-baseline group">
                                 <span className="font-serif-en text-sm tracking-[0.2em] opacity-40 group-hover:opacity-100 transition-opacity">{item.year}</span>
