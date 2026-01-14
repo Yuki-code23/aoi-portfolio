@@ -71,7 +71,7 @@ const WorkDetailPage = async ({ params }: Props) => {
 
                     <div className="pt-12">
                         <Link
-                            href="/contact"
+                            href={`/contact?work=${encodeURIComponent(work.title)}`}
                             className="block w-full py-5 border border-charcoal/10 text-center font-serif-en text-[10px] tracking-[0.4em] text-charcoal hover:bg-charcoal hover:text-white transition-all uppercase"
                         >
                             Contact about this work

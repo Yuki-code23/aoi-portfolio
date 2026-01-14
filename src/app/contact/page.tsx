@@ -1,6 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+const ContactForm = () => {
+    const searchParams = useSearchParams();
+    const workTitle = searchParams.get("work");
+
+    const defaultSubject = workTitle ? "その他 / Others" : "個人依頼 / Commission";
+    const defaultMessage = workTitle ? `作品『${workTitle}』について` : "";
+
+    return (
+        <form className="space-y-12">
+            <div className="grid md:grid-cols-2 gap-12">
+                <div className="border-b border-gray-100 pb-2">
+                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Name</label>
+                    <input type="text" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="お名前" />
+                </div>
+                <div className="border-b border-gray-100 pb-2">
+                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Email</label>
+                    <input type="email" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="メールアドレス" />
+                </div>
+            </div>
+            <div className="border-b border-gray-100 pb-2">
+                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Subject</label>
+                <select
+                    className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 appearance-none"
+                    defaultValue={defaultSubject}
+                >
+                    <option>個人依頼 / Commission</option>
+                    <option>商用利用 / Commercial</option>
+                    <option>その他 / Others</option>
+                </select>
+            </div>
+            <div className="border-b border-gray-100 pb-2">
+                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Message</label>
+                <textarea
+                    rows={4}
+                    className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 resize-none"
+                    placeholder="メッセージ内容"
+                    defaultValue={defaultMessage}
+                ></textarea>
+            </div>
+            <button className="px-12 py-4 bg-charcoal text-white font-serif-en text-[10px] tracking-[0.4em] hover:bg-black transition-all uppercase">
+                Send Message
+            </button>
+        </form>
+    );
+};
 
 const ContactPage = () => {
     return (
@@ -39,33 +87,9 @@ const ContactPage = () => {
                     </div>
 
                     <div className="w-full md:w-7/12 md:mt-48">
-                        <form className="space-y-12">
-                            <div className="grid md:grid-cols-2 gap-12">
-                                <div className="border-b border-gray-100 pb-2">
-                                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Name</label>
-                                    <input type="text" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="お名前" />
-                                </div>
-                                <div className="border-b border-gray-100 pb-2">
-                                    <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Email</label>
-                                    <input type="email" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="メールアドレス" />
-                                </div>
-                            </div>
-                            <div className="border-b border-gray-100 pb-2">
-                                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Subject</label>
-                                <select className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 appearance-none">
-                                    <option>個人依頼 / Commission</option>
-                                    <option>商用利用 / Commercial</option>
-                                    <option>その他 / Others</option>
-                                </select>
-                            </div>
-                            <div className="border-b border-gray-100 pb-2">
-                                <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Message</label>
-                                <textarea rows={4} className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 resize-none" placeholder="メッセージ内容"></textarea>
-                            </div>
-                            <button className="px-12 py-4 bg-charcoal text-white font-serif-en text-[10px] tracking-[0.4em] hover:bg-black transition-all uppercase">
-                                Send Message
-                            </button>
-                        </form>
+                        <Suspense fallback={<div className="font-serif-jp text-sm text-charcoal/20">Loading form...</div>}>
+                            <ContactForm />
+                        </Suspense>
                     </div>
                 </div>
             </motion.div>
