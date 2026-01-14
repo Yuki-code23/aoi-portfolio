@@ -19,19 +19,21 @@ const AboutPage = () => {
                             fill
                             priority
                             className="object-cover"
+                            style={{ objectPosition: 'center 20%' }}
                         />
                         <motion.div
                             initial={{ opacity: 0 }}
                             whileHover={{ opacity: 1 }}
                             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                            className="absolute inset-0 z-10"
+                            className="absolute inset-0 z-10 will-change-opacity"
                         >
                             <Image
                                 src="/images/profile_hover.jpg"
                                 alt="Profile Hover"
                                 fill
                                 priority
-                                className="object-cover"
+                                className="object-cover scale-[1.02]"
+                                style={{ objectPosition: 'center 21%' }}
                             />
                         </motion.div>
                     </div>
