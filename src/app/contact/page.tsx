@@ -4,28 +4,71 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
+import { useState } from "react";
+import { submitContact } from "@/app/actions/contact";
+
 const ContactForm = () => {
     const searchParams = useSearchParams();
     const workTitle = searchParams.get("work");
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [result, setResult] = useState<{ success?: boolean; error?: string } | null>(null);
+
     const defaultSubject = workTitle ? "その他 / Others" : "個人依頼 / Commission";
     const defaultMessage = workTitle ? `作品『${workTitle}』について` : "";
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setResult(null);
+
+        const formData = new FormData(e.currentTarget);
+        const response = await submitContact(formData);
+
+        setIsSubmitting(false);
+        setResult(response);
+
+        if (response.success) {
+            e.currentTarget.reset();
+        }
+    };
+
+    if (result?.success) {
+        return (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <div className="space-y-4">
+                    <h3 className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal uppercase">Message Sent</h3>
+                    <p className="font-serif-jp text-sm text-charcoal/60 leading-relaxed tracking-widest">
+                        お問い合わせありがとうございます。送信が完了しました。<br />
+                        内容を確認次第、改めてご連絡させていただきます。
+                    </p>
+                </div>
+                <button
+                    onClick={() => setResult(null)}
+                    className="font-serif-en text-[9px] tracking-[0.3em] text-charcoal/40 hover:text-charcoal uppercase border-b border-gray-100"
+                >
+                    Send another message
+                </button>
+            </div>
+        );
+    }
+
     return (
-        <form className="space-y-12">
+        <form className="space-y-12" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-12">
                 <div className="border-b border-gray-100 pb-2">
                     <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Name</label>
-                    <input type="text" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="お名前" />
+                    <input name="name" type="text" required className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="お名前" />
                 </div>
                 <div className="border-b border-gray-100 pb-2">
                     <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Email</label>
-                    <input type="email" className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="メールアドレス" />
+                    <input name="email" type="email" required className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0" placeholder="メールアドレス" />
                 </div>
             </div>
             <div className="border-b border-gray-100 pb-2">
                 <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Subject</label>
                 <select
+                    name="subject"
                     className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 appearance-none"
                     defaultValue={defaultSubject}
                 >
@@ -37,14 +80,25 @@ const ContactForm = () => {
             <div className="border-b border-gray-100 pb-2">
                 <label className="block font-serif-en text-[9px] text-charcoal/30 uppercase tracking-[0.3em] mb-2">Message</label>
                 <textarea
+                    name="message"
+                    required
                     rows={4}
                     className="w-full bg-transparent font-serif-jp text-sm text-charcoal outline-none transition-colors focus:border-charcoal border-none p-0 resize-none"
                     placeholder="メッセージ内容"
                     defaultValue={defaultMessage}
                 ></textarea>
             </div>
-            <button className="px-12 py-4 bg-charcoal text-white font-serif-en text-[10px] tracking-[0.4em] hover:bg-black transition-all uppercase">
-                Send Message
+
+            {result?.error && (
+                <p className="font-serif-jp text-xs text-red-400 tracking-widest">{result.error}</p>
+            )}
+
+            <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-12 py-4 bg-charcoal text-white font-serif-en text-[10px] tracking-[0.4em] hover:bg-black transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+                {isSubmitting ? "Sending..." : "Send Message"}
             </button>
         </form>
     );
