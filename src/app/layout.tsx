@@ -19,9 +19,9 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Tsukisaki Aoi | AI Artist Portfolio",
   description: "Official portfolio of AI Artist Tsukisaki Aoi. Exploring the boundaries of AI-driven creativity.",
-  // Google Search Consoleの認証用設定
   verification: {
-    google: "J7AyVqAZ--8LBLpQvXem0YX_9mHohLiYsAZDyI7nH6Y",
+    // 新しいアカウントの認証タグに差し替え済み
+    google: "vo-oSKzgd0ePePt0TD1thA9QifbxtthGf-fwhLLQyng",
   },
 };
 
