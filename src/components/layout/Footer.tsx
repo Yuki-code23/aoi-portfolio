@@ -9,8 +9,6 @@ const Footer = () => {
                 </p>
                 <div className="flex justify-center space-x-12 mb-12">
                     <Link href="https://x.com/tsukisaki_aoi" target="_blank" rel="noopener noreferrer" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">X / Twitter</Link>
-                    <Link href="#" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">Instagram</Link>
-                    <Link href="#" className="font-serif-en text-[10px] uppercase tracking-[0.2em] text-charcoal/40 hover:text-charcoal transition-colors">Pixiv</Link>
                 </div>
                 <p className="font-serif-jp text-[9px] tracking-[0.15em] text-charcoal/30 uppercase">
                     &copy; {new Date().getFullYear()} Tsukisaki Aoi. All rights reserved.

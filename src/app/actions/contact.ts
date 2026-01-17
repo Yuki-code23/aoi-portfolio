@@ -81,7 +81,7 @@ export async function submitContact(formData: FormData) {
                     </main>
                     <footer style="padding: 20px 0; border-top: 1px solid #eee; margin-top: 50px; font-size: 12px; color: #999;">
                         <p>© 2026 Aoi Tsukisaki. All Rights Reserved.</p>
-                        <p>URL: <a href="https://aoi-tsukisaki.com" style="color: #999; text-decoration: none;">aoi-tsukisaki.com</a></p>
+                        <p>URL: <a href="https://aoi-portfolio.vercel.app" style="color: #999; text-decoration: none;">aoi-portfolio.vercel.app</a></p>
                     </footer>
                 </div>
             `,

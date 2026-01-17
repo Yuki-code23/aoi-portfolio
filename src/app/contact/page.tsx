@@ -138,7 +138,7 @@ const ContactPage = () => {
                             <div className="space-y-4">
                                 <h2 className="font-serif-en text-[10px] tracking-[0.4em] text-charcoal/40 uppercase">Other Ways</h2>
                                 <div className="space-y-2 font-serif-jp text-sm text-charcoal/70 tracking-widest">
-                                    <p className="font-serif-en">Email: contact@aoi-tsukisaki.com</p>
+                                    <p className="font-serif-en">Email: aoi.tsukisaki@gmail.com</p>
                                     <p>SKIMA / Pixiv リクエスト対応</p>
                                 </div>
                             </div>
