@@ -50,5 +50,6 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* pointer-events: none; // 必要に応じて子要素での対応に切り替えるため、ここではコメントアウト */
+  pointer-events: none;
+  /* 画像への直接的なインタラクションを無効化 */
 }
