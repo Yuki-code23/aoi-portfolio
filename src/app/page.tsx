@@ -2,6 +2,8 @@ import Hero from "@/components/ui/Hero";
 import WorkCard from "@/components/ui/WorkCard";
 import { getWorks } from "@/lib/microcms";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const { contents: works } = await getWorks();
 

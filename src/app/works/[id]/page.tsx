@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Maximize2 } from "lucide-react";
 import { getWorkDetail } from "@/lib/microcms";
 
+export const revalidate = 60;
+
 interface Props {
     params: Promise<{ id: string }>;
 }
