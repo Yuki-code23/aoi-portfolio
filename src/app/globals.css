@@ -40,3 +40,15 @@ body {
   background-color: #333333;
   opacity: 0.2;
 }
+
+/* 著作権保護のための画像保存抑制策 */
+img {
+  -webkit-touch-callout: none;
+  /* iOSでの長押しメニューを禁止 */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* pointer-events: none; // 必要に応じて子要素での対応に切り替えるため、ここではコメントアウト */
+}

@@ -21,14 +21,21 @@ const WorkDetailPage = async ({ params }: Props) => {
             </Link>
 
             <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
-                <div className="lg:col-span-8 relative aspect-[3/4] md:aspect-auto md:h-[80vh] bg-gray-50 overflow-hidden">
+                <div
+                    className="lg:col-span-8 relative aspect-[3/4] md:aspect-auto md:h-[80vh] bg-gray-50 overflow-hidden"
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                >
                     <Image
                         src={work.image.url}
                         alt={work.title}
                         fill
                         className="object-contain"
                     />
-                    <div className="absolute top-6 right-6 lg:opacity-0 hover:opacity-100 transition-opacity">
+                    {/* 著作権保護のための透明オーバーレイ */}
+                    <div className="absolute inset-0 z-10 bg-transparent select-none" />
+
+                    <div className="absolute top-6 right-6 lg:opacity-0 hover:opacity-100 transition-opacity z-20">
                         <button className="p-4 bg-white/80 text-charcoal backdrop-blur-sm rounded-full">
                             <Maximize2 size={18} strokeWidth={1} />
                         </button>
